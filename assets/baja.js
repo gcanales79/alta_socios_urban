@@ -82,8 +82,8 @@ function infoSocios(){
     query.once("child_added", function (snapshot) {
         sesionesDisponibles=snapshot.val().numSesiones;
         emailSocio=snapshot.val().emailSocio;
-        console.log("Sus sesiones disponibles son " + sesionesDisponibles);
-        console.log("Sus correo es " + emailSocio);
+        //console.log("Sus sesiones disponibles son " + sesionesDisponibles);
+        //console.log("Sus correo es " + emailSocio);
     })
 }
 
