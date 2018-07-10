@@ -11,6 +11,29 @@ firebase.initializeApp(config);
 
 var dataRef = firebase.database();
 
+initApp = function() {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+
+     
+
+      } else {
+        // User is signed out.
+        console.log("-- User Signed Out --");
+        window.location.href='login.html';
+        //document.getElementById('sign-in-status').textContent = 'Signed out';
+        //document.getElementById('sign-in').textContent = 'Sign in';
+        //document.getElementById('account-details').textContent = 'null';
+      }
+    }, function(error) {
+      console.log(error);
+    });
+  };
+
+  window.addEventListener('load', function() {
+    initApp()
+  });
+
 var emailSocio;
 var nombreSocio;
 var numSocio;
@@ -20,12 +43,12 @@ var finPaquete;
 
 $("#altaSocio").on("click", function (event) {
     event.preventDefault();
-    nombreSocio = $("#contactName").val();
-    emailSocio = $("#contactEmail").val();
-    numSocio = $("#numSocio").val();
-    numSesiones = parseInt($("#numSesiones").val());
-    inicioPaquete = $("#inicioPaquete").val();
-    finPaquete = $("#finPaquete").val();
+    nombreSocio = $("#contactName").val().trim();
+    emailSocio = $("#contactEmail").val().trim();
+    numSocio = $("#numSocio").val().trim();
+    numSesiones = parseInt($("#numSesiones").val().trim());
+    inicioPaquete = $("#inicioPaquete").val().trim();
+    finPaquete = $("#finPaquete").val().trim();
 
     revisarEmail();
 
@@ -77,3 +100,20 @@ function altaSocio() {
     $("#finPaquete").val("");
 
 }
+
+//*Cerrar Sesion
+
+$("#logout").on("click",function(){
+    firebase.auth().signOut()
+    
+    
+.then(function() {
+console.log("Cerrar Sesion")
+// Sign-out successful.
+})
+.catch(function(error) {
+
+// An error happened
+});
+
+});

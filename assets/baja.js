@@ -11,6 +11,30 @@ firebase.initializeApp(config);
 
 var dataRef = firebase.database();
 
+initApp = function() {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+
+     
+
+      } else {
+        // User is signed out.
+        console.log("-- User Signed Out --");
+        window.location.href='login.html';
+        //document.getElementById('sign-in-status').textContent = 'Signed out';
+        //document.getElementById('sign-in').textContent = 'Sign in';
+        //document.getElementById('account-details').textContent = 'null';
+      }
+    }, function(error) {
+      console.log(error);
+    });
+  };
+
+  window.addEventListener('load', function() {
+    initApp()
+  });
+
+
 var diaClase;
 var randomFormat = "YYYY/MM/DD";
 var nombreSocio;
@@ -21,7 +45,7 @@ var emailSocio;
 
 $("#buscarDatos").on("click", function (event) {
     event.preventDefault();
-    nombreSocio = $("#nombreSocia").val();
+    nombreSocio = $("#nombreSocia").val().trim();
     diaClase = $("#fechaClase").val();
     var horarioClase = $("#horarioClase").val();
     var horarioClase = $("#horarioClase").val();

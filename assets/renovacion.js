@@ -9,6 +9,30 @@ var config = {
 };
 firebase.initializeApp(config);
 
+initApp = function() {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+
+     
+
+      } else {
+        // User is signed out.
+        console.log("-- User Signed Out --");
+        window.location.href='login.html';
+        //document.getElementById('sign-in-status').textContent = 'Signed out';
+        //document.getElementById('sign-in').textContent = 'Sign in';
+        //document.getElementById('account-details').textContent = 'null';
+      }
+    }, function(error) {
+      console.log(error);
+    });
+  };
+
+  window.addEventListener('load', function() {
+    initApp()
+  });
+
+
 var dataRef = firebase.database()
 var emailSocio;
 var nombreSocio;
@@ -19,7 +43,7 @@ var finNuevo;
 
 $("#buscaSocio").on("click", function (event) {
     event.preventDefault();
-    emailSocio = $("#contactEmail").val();
+    emailSocio = $("#contactEmail").val().trim();
     //console.log("El email es " + emailSocio);
     var query = dataRef.ref("/socias").orderByChild("emailSocio").equalTo(emailSocio);
     query.once("value", function (snapshot) {
