@@ -43,19 +43,32 @@ var finPaquete;
 
 $("#altaSocio").on("click", function (event) {
     event.preventDefault();
-    nombreSocio = $("#contactName").val().trim();
-    emailSocio = $("#contactEmail").val().trim();
-    numSocio = $("#numSocio").val().trim();
-    numSesiones = parseInt($("#numSesiones").val().trim());
-    inicioPaquete = $("#inicioPaquete").val().trim();
-    finPaquete = $("#finPaquete").val().trim();
+    if(document.getElementById('altasocio').checkValidity()){
+        //console.log("forma completa");
+        nombreSocio = $("#contactName").val().trim();
+        emailSocio = $("#contactEmail").val().trim();
+        numSocio = $("#numSocio").val().trim();
+        numSesiones = parseInt($("#numSesiones").val().trim());
+        inicioPaquete = $("#inicioPaquete").val().trim();
+        finPaquete = $("#finPaquete").val().trim();
+    
+        revisarEmail();
 
-    revisarEmail();
+    }
+    else {
+        //console.log("forma incompleta")
+        $("#Respuesta").empty();
+        $("#Respuesta").text("Te falto de llenar un campo por favor revisa la forma");
+    }
+   
 
 
     //* Alta de Socio en la base de datos
 
 })
+
+
+
 
 
 //* Revisa si el correo ya esta en la base de datos
